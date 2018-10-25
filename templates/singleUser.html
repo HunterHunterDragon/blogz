@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Single User</h1>
+    <form method='GET'>
+        <label>
+            Entry Name: 
+           <input type="text" name='name' /> {{errorname}}
+        </label>
+        <br><br>
+        Entry:
+        <br>
+       <label>
+            <textarea name='entry' /></textarea> {{errorentry}}
+        </label>
+        <br><br>
+        <input type="submit" value='Add Entry' />
+    </form>
+
+{% endblock %}

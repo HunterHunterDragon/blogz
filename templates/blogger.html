@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Welcome To The Blogger Page!</h1>
+
+<p>Here are all of the entries for <a href = "/Blog?id={{user.id}}">{{user.email}}</a>:</p>
+
+<ul>
+    {% for entry in entries %}
+    <li><h3>{{entry.name}}</a></h3>
+            {{entry.entry}}
+    </li>
+    <br>
+    {% endfor %}
+</ul>
+ 
+{% endblock %}

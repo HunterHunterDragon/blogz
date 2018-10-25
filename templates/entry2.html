@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Entry Name: {{name}}</h2>
+
+         Entry: {{entry}}
+
+            <br><br>
+         Post by User: <a href = "/Blog?id={{new_entry.owner_id}}">{{email}}</a>
+
+{% endblock %}
