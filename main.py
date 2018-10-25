@@ -29,16 +29,13 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120))
     password = db.Column(db.String(120))
-    birthday = db.Column(db.String(10))
-    reg_tim = db.Column(db.String(120))
     blogs = db.relationship('Blog', backref='owner')
 
-    def __init__(self, email, password, reg_tim):
+    def __init__(self, email, password):
         self.email = email
         self.password = password
-        self.birthday = birthday
-        self.reg_tim = reg_tim
-
+        
+        
 def make_salt():
     sal = ""
     for elem in range(5):
@@ -58,20 +55,10 @@ def check_pw_hash(password, hash):
     else:
         return False
 
-def retrieve_date():
-    right_now = datetime.datetime.now().isoformat()
-    list = []
-
-    for i in right_now:
-        if i.isnumeric():
-           list.append(i)
-
-    tim = "".join(list)
-    return tim
 
 @app.before_request
 def require_login():
-    allowed_routes = ['login', 'signup', 'index', 'Blog']
+    allowed_routes = ['login', 'signup', 'index', 'blog']
     if request.endpoint not in allowed_routes and 'email' not in session:
         return redirect('/login')
 
@@ -108,11 +95,10 @@ def signup():
             return redirect('/signup')
         existing_user = User.query.filter_by(email=email,).first()
         if not existing_user:
-            reg_tim = retrieve_date()
             salt = make_salt()
             hash = make_pw_hash(password)
             password = salt + hash
-            new_user = User(email, password, reg_tim)
+            new_user = User(email, password)
             db.session.add(new_user)
             db.session.commit()
             session['email'] = email

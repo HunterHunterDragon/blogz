@@ -1,11 +1,14 @@
 <!doctype html>
 <html>
     <head>
+    <style>
+       
         <title>{{title}}</title>
-        <style>textarea {
-            margin: 100px 0;
-            width: 640px;
-            height: 220px;
+        textarea {
+   
+            margin: 150px 0;
+            width: 740px;
+            height: 320px;
         }</style>
     </head>
 <body>
@@ -15,13 +18,7 @@
     {% block content %}
     {% endblock %}
 
-    {% with messages = get_flashed_messages() %}
-    <ul>
-    {% for message in messages %}
-        <li>{{message}}</li>
-    {% endfor %}
-    </ul>
-{% endwith %}
+    
 
 </body>
 </html>

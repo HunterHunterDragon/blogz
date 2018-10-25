@@ -1,29 +1,19 @@
 
-<!doctype html>
-<html>
-    <head>
-        <title>{{title}}</title>
-        <style>textarea {
-            margin: 10px 0;
-            width: 540px;
-            height: 120px;
-        }</style>
-    </head>
-<body>
-    <a href = "/Blog">Main Blog Page</a><br>
-    <a href = "/newpost">Add New Post</a><br><a href = "/">All Blog Users</a>
-    <br><br><a href = "/logout">Log Out</a>
+{% extends "base.html" %}
 
     {% block content %}
-    {% endblock %}
+    
 
-    {% with messages = get_flashed_messages() %}
+    <!-- {% with messages = get_flashed_messages() %} -->
     <ul>
-    {% for message in messages %}
-        <li>{{message}}</li>
-    {% endfor %}
+        {% for entry in entries %}
+        
+            <h2>{{entry.name}}</h2>
+            <p>{{entry.entry}}</p>
+        {% endfor %}
     </ul>
-{% endwith %}
+    <!-- {% endwith %} -->
+    {% endblock %}
 
 </body>
 </html>
