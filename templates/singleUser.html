@@ -1,20 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Single User</h1>
-    <form method='GET'>
-        <label>
-            Entry Name: 
-           <input type="text" name='name' /> {{errorname}}
-        </label>
-        <br><br>
-        Entry:
-        <br>
-       <label>
-            <textarea name='entry' /></textarea> {{errorentry}}
-        </label>
-        <br><br>
-        <input type="submit" value='Add Entry' />
-    </form>
+    <h1>Post by single user</h1>
+    <ul>
+        {% for entry in entries %}
+        
+            <h2>{{entry.name}}</h2>
+            <p>{{entry.entry}}</p>
+            <p><a href = './Blog?owner_id={{entry.owner_id}}'>{{entry.owner.email}}</p></a>
+        {% endfor %}
+    </ul>
+    
 
 {% endblock %}

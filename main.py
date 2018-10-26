@@ -118,22 +118,17 @@ def logout():
 
 @app.route('/Blog', methods=['GET', 'POST'])
 def blog():
-    if request.method == 'POST':
-        allentries = Blog.query.all()
-        id = request.args.get('id')
-        if id:
-            entry = Blog.query.get(id)
-            return render_template('entry.html', entry=entry)
-        return render_template('Blog.html', entries=allentries)
-    else:
-        allentries = Blog.query.all()
-        id = request.args.get('id')
-        if id:
-            user = User.query.get(id)
-            owner_id = id
-            entries = Blog.query.filter_by(owner_id=owner_id).all()
-            return render_template('blogger.html', user = user, entries = entries)
-        return render_template('Blog.html', entries=allentries)
+    entry = request.args.get('id')
+    allentries = Blog.query.all()
+    blogger_id = request.args.get('owner_id')
+    if entry:
+        indv_post = Blog.query.get(entry)
+        return render_template('entry.html', entry=indv_post)
+    if blogger_id:
+        posts = Blog.query.filter_by(owner_id=blogger_id) 
+        return render_template('blogger.html',entries=posts) 
+    
+    return render_template('Blog.html', entries=allentries)
 
 @app.route('/', methods=['POST', 'GET'])
 def index():

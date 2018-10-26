@@ -8,8 +8,9 @@
     <ul>
         {% for entry in entries %}
         
-            <h2>{{entry.name}}</h2>
+            <h2><a href = './Blog?id={{entry.id}}'>{{entry.name}}</h2></a>
             <p>{{entry.entry}}</p>
+            <p><a href = './Blog?owner_id={{entry.owner_id}}'>{{entry.owner.email}}</p></a>
         {% endfor %}
     </ul>
     <!-- {% endwith %} -->
